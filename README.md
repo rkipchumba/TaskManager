@@ -1,16 +1,33 @@
-# Getting Started with Quatrix Frontend Task
-This is a React app focuses on core task listing, creation, updating, deletion, and managing task status transitions.
+# Task Management System
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+The Task Management System is a web application designed to streamline task management processes. It provides users with a platform to create, update, and monitor tasks effectively.
 
-### `npm i`
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Task Creation**: Easily create new tasks with detailed information such as title, description, priority, and due date.
+- **Task Update**: Update task details and status as needed.
+- **Task Progress**: Track the progress of tasks, including starting, stopping, and reopening progress.
+<!-- - **Confirmation Dialog**: Before deleting a task, users are prompted with a confirmation dialog to prevent accidental deletions. -->
+- **Task Deletion**: Remove tasks from the system when they are no longer needed.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+
+- **Frontend**: React.js, Bootstrap
+- **Backend**: Node.js, Express.js
+- **API**: RESTful API for communication between frontend and backend
+
+## Installation
+
+1. Clone the repository.
+2. Install dependencies using `npm i`.
+3. Start the frontend server using `npm start` in the `client` directory.
+4. Start the backend server using `nodemon server.js` in the `server` directory.
+
+## Usage
+
+1. Open the application in your web browser.
+3. Create, update, delete, or manage tasks as needed.
+5. Enjoy efficient task management!
 
