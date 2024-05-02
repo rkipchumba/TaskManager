@@ -12,8 +12,8 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
-    priority: '',
-    dueDate: ''
+    task_priority: '',
+    due_date: ''
   });
 
   // Update formData whenever taskObj changes
@@ -21,8 +21,8 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     setFormData({
       subject: taskObj.subject,
       description: taskObj.description,
-      priority: taskObj.priority,
-      dueDate: taskObj.dueDate
+      priority: taskObj.task_priority,
+      due_date: taskObj.due_date
     });
   }, [taskObj]);
 
@@ -125,12 +125,12 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor='priority'>Priority:</label>
+            <label htmlFor='task_priority'>Priority:</label>
             <select
-              id='priority'
+              id='task_priority'
               className='form-control'
-              name='priority'
-              value={formData.priority}
+              name='task_priority'
+              value={formData.task_priority}
               onChange={handleChange}
             >
               <option value='high'>High</option>
@@ -139,13 +139,13 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
             </select>
           </div>
           <div className='form-group'>
-            <label htmlFor='dueDate'>Due Date:</label>
+            <label htmlFor='due_date'>Due Date:</label>
             <input
               type='date'
-              id='dueDate'
+              id='due_date'
               className='form-control'
-              name='dueDate'
-              value={formData.dueDate}
+              name='due_date'
+              value={formData.due_date}
               onChange={handleChange}
             />
           </div>

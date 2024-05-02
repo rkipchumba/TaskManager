@@ -3,12 +3,12 @@ import axios from 'axios';
 import cors from 'cors';
 
 const app = express();
-const PORT = 5000; 
+const PORT = 5000;
 
 // Use CORS middleware
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from the frontend application
-  optionsSuccessStatus: 200 
+  optionsSuccessStatus: 200
 }));
 
 const BASE_URL = "https://task.quatrixglobal.com"
@@ -46,18 +46,18 @@ app.post('/tasks', async (req, res) => {
 
 //  route to handle PATCH requests to update tasks 
 app.patch('/tasks/:taskId', async (req, res) => {
-    const { taskId } = req.params;
-    const taskData = req.body; // Task data sent from the client
-  
-    try {
-      // Make a PATCH request to update the task on the external API
-      const response = await axios.patch(`${BASE_URL}/tasks/${taskId}`, taskData);
-      const updatedTask = response.data; // Updated task object from the external API
-      res.json(updatedTask); // Send the updated task object back to the client
-    } catch (error) {
-      console.error('Error updating task:', error);
-      res.status(500).json({ error: 'An error occurred while updating the task' });
-    } 
+  const { taskId } = req.params;
+  const taskData = req.body; // Task data sent from the client
+
+  try {
+    // Make a PATCH request to update the task on the external API
+    const response = await axios.patch(`${BASE_URL}/tasks/${taskId}`, taskData);
+    const updatedTask = response.data; // Updated task object from the external API
+    res.json(updatedTask); // Send the updated task object back to the client
+  } catch (error) {
+    console.error('Error updating task:', error);
+    res.status(500).json({ error: 'An error occurred while updating the task' });
+  }
 });
 
 // Route to start a task progress
@@ -118,7 +118,7 @@ app.post('/tasks/:taskId/reopen', async (req, res) => {
     console.error('Error reopening task:', error);
     res.status(500).json({ error: 'An error occurred while reopening the task' });
   }
-}); 
+});
 
 app.delete('/tasks/:taskId', async (req, res) => {
   const { taskId } = req.params;
@@ -133,10 +133,10 @@ app.delete('/tasks/:taskId', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while deleting the task' });
   }
 });
-;';,'
+
+
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-   

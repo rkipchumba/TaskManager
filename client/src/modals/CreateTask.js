@@ -6,8 +6,8 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
   const initialFormData = {
     subject: '',
     description: '',
-    priority: 'normal',
-    dueDate: ''
+    task_priority: 'normal',
+    due_date: ''
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -18,7 +18,6 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
       [e.target.name]: e.target.value
     });
   };
-
   const handleSubmit = async () => {
     try {
       // Make a POST request to create the task
@@ -32,7 +31,7 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
       // Handle error (e.g., display error message)
     }
   };
-
+ 
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Create Task</ModalHeader>
@@ -62,12 +61,12 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
             />
           </div>
           <div className='form-group'>
-            <label htmlFor='priority'>Priority:</label>
+            <label htmlFor='task_priority'>Priority:</label>
             <select
-              id='priority'
+              id='task_priority'
               className='form-control'
-              name='priority'
-              value={formData.priority}
+              name='task_priority'
+              value={formData.task_priority}
               onChange={handleChange}
             >
               <option value='high'>High</option>
@@ -76,13 +75,13 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
             </select>
           </div>
           <div className='form-group'>
-            <label htmlFor='dueDate'>Due Date:</label>
+            <label htmlFor='due_date'>Due Date:</label>
             <input
               type='date'
-              id='dueDate'
+              id='due_date'
               className='form-control'
-              name='dueDate'
-              value={formData.dueDate}
+              name='due_date'
+              value={formData.due_date}
               onChange={handleChange}
             />
           </div>
