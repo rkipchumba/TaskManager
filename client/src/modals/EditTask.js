@@ -13,7 +13,7 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     subject: '',
     description: '',
     task_priority: '',
-    due_date: ''
+    dueDate: ''
   });
 
   // Update formData whenever taskObj changes
@@ -22,7 +22,7 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
       subject: taskObj.subject,
       description: taskObj.description,
       priority: taskObj.task_priority,
-      due_date: taskObj.due_date
+      dueDate: taskObj.due_date
     });
   }, [taskObj]);
 
