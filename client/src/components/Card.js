@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EditTask from '../modals/EditTask';
 import axios from 'axios';
-import '../App.css'
+import '../App.css';
 
 const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     const [modal, setModal] = useState(false);
@@ -13,7 +13,7 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
         { primaryColor: "#F48687", secondaryColor: "#FDF1F1" },
         { primaryColor: "#B964F7", secondaryColor: "#F3F0FD" }
     ];
-    
+
     const toggle = () => {
         setModal(!modal);
     };
@@ -26,10 +26,10 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
             updateListArray(updatedTask, index); // Update the task in the list
         } catch (error) {
             console.error('Error updating task:', error);
-            // Handle error
+            
         }
     };
- 
+
     const handleDelete = async () => {
         const confirmed = window.confirm('Are you sure you want to delete this task?');
         if (confirmed) {
@@ -39,11 +39,14 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
                 deleteTask(index); // Remove the task from the list
             } catch (error) {
                 console.error('Error deleting task:', error);
-                // Handle error
             }
         }
     };
-    
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toISOString().split('T')[0];
+    };
 
     return (
         <div className="card-wrapper mr-5">
@@ -52,7 +55,7 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
                 <span className="card-header" style={{ backgroundColor: colors[index % 5].secondaryColor, borderRadius: "10px" }}>{taskObj.subject}</span>
                 <p className="mt-3">Status: {taskObj.status_id}</p>
                 <p>Priority: {taskObj.task_priority}</p>
-                {taskObj.due_date && <p>Due Date: {taskObj.due_date}</p>}
+                {taskObj.due_date && <p>Due Date: {formatDate(taskObj.due_date)}</p>}
                 <div style={{ position: "absolute", right: "20px", bottom: "20px" }}>
                     <i className="far fa-edit mr-3" style={{ color: colors[index % 5].primaryColor, cursor: "pointer", marginRight: "10px" }} onClick={() => setModal(true)}></i>
                     <i className="fas fa-trash-alt" style={{ color: colors[index % 5].primaryColor, cursor: "pointer" }} onClick={handleDelete}></i>
