@@ -30,15 +30,19 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     };
 
     const handleDelete = async () => {
-        try {
-            // Make a DELETE request to delete the task
-            await axios.delete(`http://localhost:5000/tasks/${taskObj.id}`);
-            deleteTask(index); // Remove the task from the list
-        } catch (error) {
-            console.error('Error deleting task:', error);
-            // Handle error
+        const confirmed = window.confirm('Are you sure you want to delete this task?');
+        if (confirmed) {
+            try {
+                // Make a DELETE request to delete the task
+                await axios.delete(`http://localhost:5000/tasks/${taskObj.id}`);
+                deleteTask(index); // Remove the task from the list
+            } catch (error) {
+                console.error('Error deleting task:', error);
+                // Handle error
+            }
         }
     };
+    
 
     return (
         <div className="card-wrapper mr-5">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { startTaskProgress, stopTaskProgress, closeTask, reopenTask, deleteTask } from '../services/TaskService';
+import { startTaskProgress, stopTaskProgress, closeTask, reopenTask } from '../services/TaskService';
 
 const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
   const [formData, setFormData] = useState({

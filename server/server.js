@@ -8,8 +8,10 @@ const PORT = 5000;
 // Use CORS middleware
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from the frontend application
-  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200 
 }));
+
+const BASE_URL = "https://task.quatrixglobal.com"
 
 // Middleware to parse request body as JSON
 app.use(express.json());
@@ -17,7 +19,7 @@ app.use(express.json());
 // Route to forward GET requests to fetch tasks from the Task API
 app.get('/tasks', async (req, res) => {
   try {
-    const response = await axios.get('https://task.quatrixglobal.com/tasks', {
+    const response = await axios.get(`${BASE_URL}/tasks`, {
       params: req.query // Pass along query parameters from the frontend request
     });
     res.json(response.data);
@@ -33,7 +35,7 @@ app.post('/tasks', async (req, res) => {
 
   try {
     // Make a POST request to create the task on the external API
-    const response = await axios.post('https://task.quatrixglobal.com/tasks', taskData);
+    const response = await axios.post(`${BASE_URL}/tasks`, taskData);
     const createdTask = response.data; // Created task object from the external API
     res.json(createdTask); // Send the created task object back to the client
   } catch (error) {
@@ -49,7 +51,7 @@ app.patch('/tasks/:taskId', async (req, res) => {
   
     try {
       // Make a PATCH request to update the task on the external API
-      const response = await axios.patch(`https://task.quatrixglobal.com/tasks/${taskId}`, taskData);
+      const response = await axios.patch(`${BASE_URL}/tasks/${taskId}`, taskData);
       const updatedTask = response.data; // Updated task object from the external API
       res.json(updatedTask); // Send the updated task object back to the client
     } catch (error) {
@@ -64,7 +66,7 @@ app.post('/tasks/:taskId/start_progress', async (req, res) => {
 
   try {
     // Make a POST request to start the task progress
-    const response = await axios.post(`https://task.quatrixglobal.com/tasks/${taskId}/start_progress`);
+    const response = await axios.post(`${BASE_URL}/tasks/${taskId}/start_progress`);
     const updatedTask = response.data; // Updated task object from the external API
     res.json(updatedTask); // Send the updated task object back to the client
   } catch (error) {
@@ -79,7 +81,7 @@ app.post('/tasks/:taskId/stop_progress', async (req, res) => {
 
   try {
     // Make a POST request to stop the progress of the task on the external API
-    const response = await axios.post(`https://task.quatrixglobal.com/tasks/${taskId}/stop_progress`);
+    const response = await axios.post(`${BASE_URL}/tasks/${taskId}/stop_progress`);
     const updatedTask = response.data; // Updated task object from the external API
     res.json(updatedTask); // Send the updated task object back to the client
   } catch (error) {
@@ -94,7 +96,7 @@ app.post('/tasks/:taskId/close', async (req, res) => {
 
   try {
     // Make a POST request to close the task on the external API
-    const response = await axios.post(`https://task.quatrixglobal.com/tasks/${taskId}/close`);
+    const response = await axios.post(`${BASE_URL}/tasks/${taskId}/close`);
     const updatedTask = response.data; // Updated task object from the external API
     res.json(updatedTask); // Send the updated task object back to the client
   } catch (error) {
@@ -109,7 +111,7 @@ app.post('/tasks/:taskId/reopen', async (req, res) => {
 
   try {
     // Make a POST request to reopen the closed task on the external API
-    const response = await axios.post(`https://task.quatrixglobal.com/tasks/${taskId}/reopen`);
+    const response = await axios.post(`${BASE_URL}/tasks/${taskId}/reopen`);
     const updatedTask = response.data; // Updated task object from the external API
     res.json(updatedTask); // Send the updated task object back to the client
   } catch (error) {
@@ -123,7 +125,7 @@ app.delete('/tasks/:taskId', async (req, res) => {
 
   try {
     // Make a DELETE request to delete the task on the external API
-    const response = await axios.delete(`https://task.quatrixglobal.com/tasks/${taskId}`);
+    const response = await axios.delete(`${BASE_URL}/tasks/${taskId}`);
     const deletedTask = response.data; // Deleted task object from the external API
     res.json(deletedTask); // Send the deleted task object back to the client
   } catch (error) {
@@ -131,7 +133,7 @@ app.delete('/tasks/:taskId', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while deleting the task' });
   }
 });
-
+;';,'
 
 // Start the server
 app.listen(PORT, () => {

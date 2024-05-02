@@ -9,7 +9,7 @@ The Task Management System is a web application designed to streamline task mana
 - **Task Creation**: Easily create new tasks with detailed information such as title, description, priority, and due date.
 - **Task Update**: Update task details and status as needed.
 - **Task Progress**: Track the progress of tasks, including starting, stopping, and reopening progress.
-<!-- - **Confirmation Dialog**: Before deleting a task, users are prompted with a confirmation dialog to prevent accidental deletions. -->
+- **Confirmation Dialog**: Before deleting a task, users are prompted with a confirmation dialog to prevent accidental deletions.
 - **Task Deletion**: Remove tasks from the system when they are no longer needed.
 
 ## Technologies Used

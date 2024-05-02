@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000';
 
+
 export const startTaskProgress = async (taskId) => {
   try {
     const response = await axios.post(`${API_URL}/tasks/${taskId}/start_progress`);
