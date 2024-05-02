@@ -21,7 +21,7 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     setFormData({
       subject: taskObj.subject,
       description: taskObj.description,
-      priority: taskObj.task_priority,
+      task_priority: taskObj.task_priority,
       dueDate: taskObj.due_date
     });
   }, [taskObj]);
