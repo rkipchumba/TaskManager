@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
-import { startTaskProgress, stopTaskProgress, closeTask, reopenTask } from '../services/TaskService';
+import { 
+  startTaskProgress, 
+  stopTaskProgress, 
+  closeTask, 
+  reopenTask 
+} from '../services/TaskService';
 
 const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
   const [formData, setFormData] = useState({
-    subject: taskObj.subject,
-    description: taskObj.description,
-    priority: taskObj.priority,
-    dueDate: taskObj.dueDate
+    subject: '',
+    description: '',
+    priority: '',
+    dueDate: ''
   });
 
+  // Update formData whenever taskObj changes
+  useEffect(() => {
+    setFormData({
+      subject: taskObj.subject,
+      description: taskObj.description,
+      priority: taskObj.priority,
+      dueDate: taskObj.dueDate
+    });
+  }, [taskObj]);
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
+
 
   const handleSubmit = async () => {
     try {
@@ -77,11 +94,7 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
       console.error('Error reopening task:', error);
       // Handle error
     }
-  };
-
-  
-  
-
+  }; 
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
@@ -139,36 +152,35 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
         </form>
       </ModalBody>
       <ModalFooter>
-  <Button color='primary' onClick={handleSubmit}>
-    Update
-  </Button>
-  <Button color='secondary' onClick={toggle}>
-    Cancel
-  </Button>
-  {taskObj.status_id === 'in_progress' ? (
-    <Button color='danger' onClick={handleStopProgress}>
-      Stop Progress
-    </Button>
-  ) : (
-    <Button color='success' onClick={handleStartProgress}>
-      Start Progress
-    </Button>
-  )}
-  {taskObj.status_id !== 'closed' && (
-    <Button color='warning' onClick={handleCloseTask}>
-      Close Task
-    </Button>
-  )}
-  {taskObj.status_id === 'closed' && (
-    <Button color='info' onClick={handleReopenTask}>
-      Reopen Task
-    </Button>
-  )}
-</ModalFooter>
-
-
+        <Button color='primary' onClick={handleSubmit}>
+          Update
+        </Button>
+        <Button color='secondary' onClick={toggle}>
+          Cancel
+        </Button>
+        {taskObj.status_id === 'in_progress' ? (
+          <Button color='danger' onClick={handleStopProgress}>
+            Stop Progress
+          </Button>
+        ) : (
+          <Button color='success' onClick={handleStartProgress}>
+            Start Progress
+          </Button>
+        )}
+        {taskObj.status_id !== 'closed' && (
+          <Button color='warning' onClick={handleCloseTask}>
+            Close Task
+          </Button>
+        )}
+        {taskObj.status_id === 'closed' && (
+          <Button color='info' onClick={handleReopenTask}>
+            Reopen Task
+          </Button>
+        )}
+      </ModalFooter>
     </Modal>
   );
 };
 
 export default EditTask;
+ 

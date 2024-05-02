@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import EditTask from '../modals/EditTask';
 import axios from 'axios';
+import '../App.css'
 
 const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     const [modal, setModal] = useState(false);
@@ -28,7 +29,7 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
             // Handle error
         }
     };
-
+ 
     const handleDelete = async () => {
         const confirmed = window.confirm('Are you sure you want to delete this task?');
         if (confirmed) {

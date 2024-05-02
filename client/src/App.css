@@ -67,3 +67,23 @@
   color: inherit;
   cursor: pointer;
 }
+
+.pagination {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+}
+
+.page-number {
+  font-weight: bold;
+}

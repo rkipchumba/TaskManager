@@ -14,16 +14,17 @@ The Task Management System is a web application designed to streamline task mana
 
 ## Technologies Used
 
-- **Frontend**: React.js, Bootstrap
+- **Frontend**: React.js
 - **Backend**: Node.js, Express.js
 - **API**: RESTful API for communication between frontend and backend
 
 ## Installation
 
 1. Clone the repository.
-2. Install dependencies using `npm i`.
-3. Start the frontend server using `npm start` in the `client` directory.
-4. Start the backend server using `nodemon server.js` in the `server` directory.
+2. `cd client` and Install dependencies using `npm i`
+3. `cd server` and Install dependencies using `npm i`.
+4. Start the frontend server using `npm start` in the `client` directory.
+5. Start the backend server using `nodemon server.js` in the `server` directory.
 
 ## Usage
 

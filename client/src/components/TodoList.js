@@ -8,7 +8,7 @@ const TodoList = () => {
     const [tasks, setTasks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const toggle = () => setModal(!modal);
+    const toggle = () => setModal(!modal); 
 
     useEffect(() => {
         // Fetch tasks from the API when the component mounts
