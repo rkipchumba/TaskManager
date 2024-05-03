@@ -22,13 +22,12 @@ const CreateTask = ({ modal, toggle, onCreateTask }) => {
     try {
       // Make a POST request to create the task
       const response = await axios.post('http://localhost:5000/tasks', formData);
-      const createdTask = response.data; // Created task object received from the server
+      const createdTask = response.data; 
       onCreateTask(createdTask); // Call the onCreateTask function with the created task data
       setFormData(initialFormData); // Reset form data to initial empty values
-      toggle(); // Close the modal after submitting
+      toggle(); 
     } catch (error) {
       console.error('Error creating task:', error);
-      // Handle error (e.g., display error message)
     }
   };
  

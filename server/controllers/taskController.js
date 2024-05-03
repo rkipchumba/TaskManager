@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const BASE_URL = "https://task.quatrixglobal.com";
-
+ 
 const taskController = {
-  async getTasks(req, res) {
+  async getTasks(req, res) {   
     try {
       const response = await axios.get(`${BASE_URL}/tasks`, {
         params: req.query
@@ -21,7 +21,7 @@ const taskController = {
       const response = await axios.post(`${BASE_URL}/tasks`, taskData);
       const createdTask = response.data;
       res.json(createdTask);
-    } catch (error) {
+    } catch (error) { 
       console.error('Error creating task:', error);
       res.status(500).json({ error: 'An error occurred while creating the task' });
     }

@@ -16,7 +16,6 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     dueDate: ''
   });
 
-  // Update formData whenever taskObj changes
   useEffect(() => {
     setFormData({
       subject: taskObj.subject,
@@ -34,74 +33,53 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     });
   };
 
+  const updateTaskStatus = async (actionType) => {
+    try {
+      let updatedTask = taskObj;
+      switch (actionType) {
+        case 'start':
+          await startTaskProgress(taskObj.id);
+          updatedTask = { ...taskObj, status_id: 'in_progress' };
+          break;
+        case 'stop':
+          await stopTaskProgress(taskObj.id);
+          updatedTask = { ...taskObj, status_id: 'open' };
+          break;
+        case 'close':
+          await closeTask(taskObj.id);
+          updatedTask = { ...taskObj, status_id: 'closed' };
+          break;
+        case 'reopen':
+          await reopenTask(taskObj.id);
+          updatedTask = { ...taskObj, status_id: 'open' };
+          break;
+        default:
+          break;
+      }
+      onUpdateTask(updatedTask);
+      toggle();
+    } catch (error) {
+      console.error(`Error ${actionType}ing task:`, error);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
-      // Make a PATCH request to update the task
       const response = await axios.patch(`http://localhost:5000/tasks/${taskObj.id}`, formData);
-      const updatedTask = response.data; // Updated task object received from the server
-      onUpdateTask(updatedTask); // Call the onUpdateTask function with the updated task data
-      toggle(); // Close the modal after submitting
+      const updatedTask = response.data;
+      onUpdateTask(updatedTask);
+      toggle();
     } catch (error) {
       console.error('Error updating task:', error);
-      // Handle error
     }
   };
-
-  const handleStartProgress = async () => {
-    try {
-      await startTaskProgress(taskObj.id);
-      // Call onUpdateTask to refresh task data after starting progress
-      onUpdateTask({ ...taskObj, status_id: 'in_progress' });
-      toggle(); // Close the modal after starting progress
-    } catch (error) {
-      console.error('Error starting task progress:', error);
-      // Handle error
-    }
-  };
-
-  const handleStopProgress = async () => {
-    try {
-      await stopTaskProgress(taskObj.id);
-      // Call onUpdateTask to refresh task data after stopping progress
-      onUpdateTask({ ...taskObj, status_id: 'open' });
-      toggle(); // Close the modal after stopping progress
-    } catch (error) {
-      console.error('Error stopping task progress:', error);
-      // Handle error
-    }
-  };
-
-  const handleCloseTask = async () => {
-    try {
-      await closeTask(taskObj.id);
-      // Call onUpdateTask to refresh task data after closing the task
-      onUpdateTask({ ...taskObj, status_id: 'closed' });
-      toggle(); // Close the modal after updating the task
-    } catch (error) {
-      console.error('Error closing task:', error);
-      // Handle error
-    }
-  };
-
-  const handleReopenTask = async () => {
-    try {
-      await reopenTask(taskObj.id);
-      // Call onUpdateTask to refresh task data after reopening the task
-      onUpdateTask({ ...taskObj, status_id: 'open' });
-      toggle(); // Close the modal after updating the task
-    } catch (error) {
-      console.error('Error reopening task:', error);
-      // Handle error
-    }
-  }; 
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>Edit Task</ModalHeader>
       <ModalBody>
         <form>
-          <div className='form-group'>
+        <div className='form-group'>
             <label htmlFor='subject'>Subject:</label>
             <input
               type='text'
@@ -158,22 +136,16 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
         <Button color='secondary' onClick={toggle}>
           Cancel
         </Button>
-        {taskObj.status_id === 'in_progress' ? (
-          <Button color='danger' onClick={handleStopProgress}>
-            Stop Progress
-          </Button>
-        ) : (
-          <Button color='success' onClick={handleStartProgress}>
-            Start Progress
-          </Button>
-        )}
+        <Button color={taskObj.status_id === 'in_progress' ? 'danger' : 'success'} onClick={() => updateTaskStatus(taskObj.status_id === 'in_progress' ? 'stop' : 'start')}>
+          {taskObj.status_id === 'in_progress' ? 'Stop Progress' : 'Start Progress'}
+        </Button>
         {taskObj.status_id !== 'closed' && (
-          <Button color='warning' onClick={handleCloseTask}>
+          <Button color='warning' onClick={() => updateTaskStatus('close')}>
             Close Task
           </Button>
         )}
         {taskObj.status_id === 'closed' && (
-          <Button color='info' onClick={handleReopenTask}>
+          <Button color='info' onClick={() => updateTaskStatus('reopen')}>
             Reopen Task
           </Button>
         )}
@@ -181,6 +153,7 @@ const EditTask = ({ modal, toggle, onUpdateTask, taskObj }) => {
     </Modal>
   );
 };
+
 
 export default EditTask;
  

@@ -29,6 +29,7 @@ The Task Management System is a web application designed to streamline task mana
 ## Usage
 
 1. Open the application in your web browser.
+2. In every task the `edit` button is used to manage task i.e Start, Stop, Close, Reopen and Updating the task
 3. Create, update, delete, or manage tasks as needed.
-5. Enjoy efficient task management!
+4. Enjoy efficient task management!
 

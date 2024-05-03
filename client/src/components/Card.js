@@ -3,6 +3,7 @@ import EditTask from '../modals/EditTask';
 import axios from 'axios';
 import '../App.css';
 
+const BASE_URL = 'http://localhost:5000'
 const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     const [modal, setModal] = useState(false);
 
@@ -21,7 +22,7 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
     const updateTask = async (updatedTaskData) => {
         try {
             // Make a PATCH request to update the task
-            const response = await axios.patch(`http://localhost:5000/tasks/${taskObj.id}`, updatedTaskData);
+            const response = await axios.patch(`${BASE_URL}/tasks/${taskObj.id}`, updatedTaskData);
             const updatedTask = response.data; // Updated task object received from the server
             updateListArray(updatedTask, index); // Update the task in the list
         } catch (error) {
@@ -35,7 +36,7 @@ const Card = ({ taskObj, index, deleteTask, updateListArray }) => {
         if (confirmed) {
             try {
                 // Make a DELETE request to delete the task
-                await axios.delete(`http://localhost:5000/tasks/${taskObj.id}`);
+                await axios.delete(`${BASE_URL}/tasks/${taskObj.id}`);
                 deleteTask(index); // Remove the task from the list
             } catch (error) {
                 console.error('Error deleting task:', error);
